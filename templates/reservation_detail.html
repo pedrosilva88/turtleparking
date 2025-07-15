@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Reservation Details - TurtleParking' %}{% endblock %}
+{% block content %}
+<h2>{% trans 'Reservation Details' %}</h2>
+<ul>
+    <li><b>ID:</b> {{ reservation.id }}</li>
+    <li><b>{% trans 'Vehicle' %}:</b> {{ reservation.vehicle.plate }} - {{ reservation.vehicle.model }}</li>
+    <li><b>{% trans 'Service' %}:</b> {{ reservation.service_type }}</li>
+    <li><b>{% trans 'Start' %}:</b> {{ reservation.start_datetime }}</li>
+    <li><b>{% trans 'End' %}:</b> {{ reservation.end_datetime }}</li>
+    <li><b>{% trans 'Status' %}:</b> {{ reservation.status }}</li>
+</ul>
+<a href="{% url 'dashboard' %}">{% trans 'Back to Dashboard' %}</a>
+{% endblock %} 

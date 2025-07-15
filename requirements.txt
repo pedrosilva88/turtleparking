@@ -1,0 +1,9 @@
+asgiref==3.9.1
+dj-rest-auth==7.0.1
+Django==5.2.4
+django-allauth==65.10.0
+django-otp==1.6.1
+djangorestframework==3.16.0
+pillow==11.3.0
+sqlparse==0.5.3
+typing_extensions==4.14.1

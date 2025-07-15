@@ -1,0 +1,22 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TurtleParking{% endblock %}</title>
+</head>
+<body>
+    <form action="{% url 'set_language' %}" method="post" style="float:right;">
+        {% csrf_token %}
+        <select name="language" onchange="this.form.submit()">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <div style="clear:both;"></div>
+    {% block content %}{% endblock %}
+</body>
+</html> 

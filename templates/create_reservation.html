@@ -1,0 +1,79 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'New Reservation - TurtleParking' %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center">{% trans 'Nova Reserva' %}</h2>
+                    {% if reservation_data %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Veículo' %}</label>
+                                <select name="vehicle" class="form-select" required>
+                                    {% for v in vehicles %}
+                                    <option value="{{ v.id }}">{{ v.plate }} - {{ v.model }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Serviço' %}</label>
+                                <select name="service_type" class="form-select" required>
+                                    <option value="standard">{% trans 'Standard' %}</option>
+                                    <option value="valet">{% trans 'Valet' %}</option>
+                                    <option value="shuttle">{% trans 'Shuttle' %}</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-success w-100">{% trans 'Confirmar Reserva' %}</button>
+                        </form>
+                    {% else %}
+                        <!-- Formulário tradicional (dashboard) -->
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Veículo' %}</label>
+                                <select name="vehicle" class="form-select" required>
+                                    {% for v in vehicles %}
+                                    <option value="{{ v.id }}">{{ v.plate }} - {{ v.model }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Serviço' %}</label>
+                                <select name="service_type" class="form-select" required>
+                                    <option value="standard">{% trans 'Standard' %}</option>
+                                    <option value="valet">{% trans 'Valet' %}</option>
+                                    <option value="shuttle">{% trans 'Shuttle' %}</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Início' %}</label>
+                                <input type="datetime-local" name="start_datetime" class="form-control" required value="{{ reservation_data.start_datetime|default:'' }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{% trans 'Fim' %}</label>
+                                <input type="datetime-local" name="end_datetime" class="form-control" required value="{{ reservation_data.end_datetime|default:'' }}">
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">{% trans 'Reservar' %}</button>
+                        </form>
+                    {% endif %}
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'dashboard' %}">{% trans 'Voltar' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 

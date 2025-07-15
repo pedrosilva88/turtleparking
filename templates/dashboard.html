@@ -1,0 +1,41 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Dashboard - TurtleParking' %}</title>
+</head>
+<body>
+    <form action="{% url 'set_language' %}" method="post" style="float:right;">
+        {% csrf_token %}
+        <select name="language" onchange="this.form.submit()">
+            {% get_current_language as LANGUAGE_CODE %}
+            {% get_available_languages as LANGUAGES %}
+            {% for lang in LANGUAGES %}
+                <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>{{ lang.1 }}</option>
+            {% endfor %}
+        </select>
+    </form>
+    <h2>{% trans 'Welcome' %}, {{ request.user.name }}</h2>
+    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a> |
+    <a href="{% url 'create-reservation' %}">{% trans 'New Reservation' %}</a>
+    <h3>{% trans 'Your Reservations' %}</h3>
+    <table border="1">
+        <tr>
+            <th>ID</th><th>{% trans 'Vehicle' %}</th><th>{% trans 'Service' %}</th><th>{% trans 'Start' %}</th><th>{% trans 'End' %}</th><th>{% trans 'Status' %}</th>
+        </tr>
+        {% for reserva in reservas %}
+        <tr>
+            <td>{{ reserva.id }}</td>
+            <td>{{ reserva.vehicle.plate }} - {{ reserva.vehicle.model }}</td>
+            <td>{{ reserva.service_type }}</td>
+            <td>{{ reserva.start_datetime }}</td>
+            <td>{{ reserva.end_datetime }}</td>
+            <td>{{ reserva.status }}</td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6">{% trans 'No reservations found.' %}</td></tr>
+        {% endfor %}
+    </table>
+</body>
+</html> 

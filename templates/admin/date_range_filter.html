@@ -1,0 +1,16 @@
+{% load i18n %}
+<div style="padding: 8px 16px;">
+  <form method="get">
+    {% for param, value in request.GET.items %}
+      {% if param != spec.parameter_name %}
+        <input type="hidden" name="{{ param }}" value="{{ value }}">
+      {% endif %}
+    {% endfor %}
+    <label for="id_{{ spec.parameter_name }}">{{ spec.title }}:</label>
+    <input type="date" id="id_{{ spec.parameter_name }}" name="{{ spec.parameter_name }}" value="{{ request.GET.spec.parameter_name|default:'' }}" style="width: 140px;">
+    <button type="submit" class="button">Filtrar</button>
+    {% if request.GET.spec.parameter_name %}
+      <a href="?{% for param, value in request.GET.items %}{% if param != spec.parameter_name %}{{ param }}={{ value|urlencode }}&{% endif %}{% endfor %}">Limpar</a>
+    {% endif %}
+  </form>
+</div> 

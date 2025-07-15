@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Add Vehicle - TurtleParking' %}{% endblock %}
+{% block content %}
+<h2>{% trans 'Add Vehicle' %}</h2>
+<form method="post">
+    {% csrf_token %}
+    <label>{% trans 'Plate' %}:</label><br>
+    <input type="text" name="plate" required><br>
+    <label>{% trans 'Model' %}:</label><br>
+    <input type="text" name="model" required><br>
+    <label>{% trans 'Brand' %}:</label><br>
+    <input type="text" name="brand"><br>
+    <label>{% trans 'Color' %}:</label><br>
+    <input type="text" name="color"><br><br>
+    <button type="submit">{% trans 'Save' %}</button>
+    <a href="{% url 'vehicles' %}">{% trans 'Cancel' %}</a>
+</form>
+{% endblock %} 

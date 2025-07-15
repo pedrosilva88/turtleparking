@@ -1,0 +1,32 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans 'Legal Notice - TurtleParking' %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow">
+                <div class="card-body">
+                    <h2 class="mb-4 text-center">{% trans 'Legal Notice' %}</h2>
+                    <p>{% trans 'This site is a prototype for demonstration of the TurtleParking service. No information presented here constitutes a binding offer. For more information, contact us.' %}</p>
+                    <ul>
+                        <li>{% trans 'All rights reserved.' %}</li>
+                        <li>{% trans 'User data is treated confidentially.' %}</li>
+                        <li>{% trans 'See our privacy policy for more details.' %}</li>
+                    </ul>
+                    <div class="text-center mt-4">
+                        <a href="/" class="btn btn-outline-primary">{% trans 'Back to Home' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> 
