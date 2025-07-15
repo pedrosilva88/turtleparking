@@ -1,5 +1,6 @@
 gunicorn
 dj-database-url
+drf-yasg
 asgiref==3.9.1
 dj-rest-auth==7.0.1
 Django==5.2.4
